@@ -53,6 +53,7 @@ export default function Insertionsort() {
       if (index >= swaps.length) {
         clearInterval(intervalRef.current);
         setIsAnimating(false);
+setSelectedBar([]);
         return;
       }
 
