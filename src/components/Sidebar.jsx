@@ -12,11 +12,11 @@ export default function SideBar({
   }
   return (
     <div
-      className={`absolute h-screen left-0 w-[250px] bg-transparent backdrop-blur-xl z-10 border-r border-r-white/20 ease-in-out duration-150 ${
+      className={`absolute h-screen left-0 w-[250px] bg-transparent backdrop-blur-xl z-10 border-r border-r-white/20 ease-in-out duration-150 overflow-hidden ${
         sidebarStatus ? "" : "-translate-x-full"
       }`}
     >
-      <div className="p-2 flex items-center justify-end">
+      <div className="p-2 relative flex items-center justify-end">
         <IconButton onClick={() => toggleSidebar()}>
           <SidebarCloseIcon />
         </IconButton>
@@ -38,6 +38,18 @@ export default function SideBar({
           }}
           algo={algo}
         />
+        <div className="flex flex-col absolute bottom-0 p-4 text-center w-full bg-black left-0 gap-2">
+          <h3 className="text-neutral-400">
+            For{" "}
+            <abbr
+              title="Bachelors of Computer Application"
+              className="text-orange-400"
+            >
+              BCA
+            </abbr>
+          </h3>
+          <p className="text-xs text-neutral-300">with ❤️ Sahil Saini</p>
+        </div>
       </div>
     </div>
   );
