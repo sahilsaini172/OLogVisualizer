@@ -1,8 +1,8 @@
-export default function IconButton({ onClick, children }) {
+export default function IconButton({ onClick, children,className="" }) {
   return (
     <div
       onClick={onClick}
-      className="p-2 hover:bg-white/10 w-fit rounded-lg duration-100 ease-in"
+      className={`p-2 hover:bg-white/10 w-fit rounded-lg duration-100 ease-in ${className}`}
     >
       {children}
     </div>
