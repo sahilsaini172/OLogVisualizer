@@ -18,6 +18,9 @@
   --secondaryContainer: #dae2f9;
   --onSecondaryContainer: #3e4759;
 
+  --tertiary: #705575;
+  --onTertiary: #ffffff;
+
   --surface: #f9f9ff;
   --onSurface: #191c20;
   --onSurfaceVarient: #44474e;
@@ -45,6 +48,9 @@
   --secondaryContainer: #3e4759;
   --onSecondaryContainer: #dae2f9;
 
+  --tertiary: #ddbce0;
+  --onTertiary: #3f2844;
+
   --surface: #111318;
   --onSurface: #e2e2e9;
   --onSurfaceVarient: #44474e;
@@ -71,6 +77,9 @@
   --color-onSecondary: var(--onSecondary);
   --color-secondaryContainer: var(--secondaryContainer);
   --color-onSecondaryContainer: var(--onSecondaryContainer);
+
+  --color-tertiary: var(--tertiary);
+  --color-onTertiary: var(--onTertiary);
 
   --color-surface: var(--surface);
   --color-onSurface: var(--onSurface);

@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import SideBar from "../components/Sidebar";
 import Bubblesort from "../algorithms/Bubblesort";
 import Insertionsort from "../algorithms/Insertionsort";
+import SelectionSort from "../algorithms/Selectionsort";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +19,8 @@ export default function Home() {
         return <Bubblesort />;
       case "InsertionSort":
         return <Insertionsort />;
+      case "SelectionSort":
+        return <SelectionSort />;
       default:
         return <Bubblesort />;
     }
@@ -38,9 +41,7 @@ export default function Home() {
         <h1 className="text-headline-large">
           Javascript Algorithms Visualizer
         </h1>
-        <div className="mt-6">
-          {renderAlgo()}
-        </div>
+        <div className="mt-6">{renderAlgo()}</div>
       </main>
     </div>
   );

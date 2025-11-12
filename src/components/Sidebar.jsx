@@ -31,6 +31,14 @@ export default function SideBar({
           }}
           algo={algo}
         />
+        <SideBarItem
+          text="SelectionSort"
+          onClick={() => {
+            changeAlgo("SelectionSort");
+            toggleSidebar();
+          }}
+          algo={algo}
+        />
         <div className="flex flex-col absolute bottom-0 p-4 text-center w-full bg-black left-0 gap-2">
           <h3 className="text-neutral-400">
             For{" "}
