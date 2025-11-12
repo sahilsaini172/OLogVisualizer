@@ -1,7 +1,4 @@
-// index.js
-import "@material/web/button/filled-button.js";
-import "@material/web/button/outlined-button.js";
-import "@material/web/checkbox/checkbox.js";
+
 import { useRef } from "react";
 import IconButton from "../components/Buttons/IconButton";
 import { Code } from "lucide-react";
