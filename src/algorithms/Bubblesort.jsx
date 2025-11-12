@@ -1,7 +1,15 @@
+// index.js
+import "@material/web/button/filled-button.js";
+import "@material/web/button/outlined-button.js";
+import "@material/web/checkbox/checkbox.js";
 import { useRef } from "react";
-import IconButton from "../components/IconButton";
+import IconButton from "../components/Buttons/IconButton";
 import { Code } from "lucide-react";
 import { useEffect, useState } from "react";
+import ElevatedCard from "../components/cards/ElevatedCards";
+import Bar from "../components/Bar";
+import StandardButtonS from "../components/Buttons/StandardButton";
+import TonalButton from "../components/Buttons/TonalButton";
 
 export default function BubbleSort() {
   const [array, setArray] = useState([]);
@@ -108,20 +116,22 @@ export default function BubbleSort() {
   }, []);
 
   return (
-    <section className="p-4 flex flex-col justify-center w-full">
-      <h2 className="font-semibold text-center py-3 text-xl">Bubble Sort</h2>
+    <ElevatedCard className={"flex flex-col"}>
+      <div className="text-title-large flex items-center justify-between">
+        <h2>Bubble Sort</h2>
+        <IconButton>
+          <Code />
+        </IconButton>
+      </div>
       <div className="flex flex-col flex-1 ">
-        <div className="relative flex h-[400px] items-end justify-between gap-0.5 border-2 border-white/25 p-4 rounded-2xl">
-          <IconButton className="absolute top-2 right-2 z-1">
-            <Code />
-          </IconButton>
+        <div className="relative flex h-[400px] items-end justify-between gap-0.5">
           {workingArray.length > 0 ? showArray(workingArray) : showArray(array)}
         </div>
         <div className="flex flex-col">
           <div className="flex flex-col gap-2 p-2 mt-4">
-            <label htmlFor="bars" className="text-sm">
+            <label htmlFor="bars" className="text-label-medium">
               Bar count:{" "}
-              <span className="text-orange-400 font-medium">{barCount}</span>
+              <span className="text-secondary font-medium">{barCount}</span>
             </label>
             <input
               type="range"
@@ -135,9 +145,8 @@ export default function BubbleSort() {
             />
           </div>
           <div className="flex flex-col gap-2 p-2 mt-4">
-            <label htmlFor="bars" className="text-sm">
-              Speed:{" "}
-              <span className="text-orange-400 font-medium">{speed}</span>
+            <label htmlFor="bars" className="text-label-medium">
+              Speed: <span className="text-secondary font-medium">{speed}</span>
             </label>
             <input
               type="range"
@@ -151,45 +160,26 @@ export default function BubbleSort() {
             />
           </div>
 
-          <div className="flex items-center gap-4 mt-5">
-            <button
+          <div className="flex items-center gap-4 mt-5 w-full">
+            <TonalButton
+              text="Randomize"
+              disabled={isAnimating}
               onClick={init}
-              disabled={isAnimating}
-              className="px-4 bg-orange-500/25 py-2 rounded-lg text-orange-400 disabled:grayscale ease-in duration-75"
-            >
-              init
-            </button>
-            <button
+            />
+            <StandardButtonS
               onClick={play}
-              disabled={isAnimating}
-              className="px-4 w-full bg-orange-500/25 py-2 rounded-lg text-orange-400 disabled:grayscale ease-in duration-75"
-            >
-              play
-            </button>
-            <button
-              onClick={stopAnimation}
+              variant="primary"
+              text="Play"
+              className="flex-1"
+            />
+            <TonalButton
+              text="Stop"
               disabled={!isAnimating}
-              className="px-4 bg-orange-500/25 py-2 rounded-lg text-orange-400 disabled:grayscale ease-in duration-75"
-            >
-              Stop
-            </button>
+              onClick={stopAnimation}
+            />
           </div>
         </div>
       </div>
-    </section>
-  );
-}
-
-function Bar({ index, height, value, selected }) {
-  return (
-    <div
-      key={index}
-      style={{ height: height }}
-      className={`rounded-full w-full relative ${
-        !selected ? "bg-orange-500/70" : "bg-[#0096FF]"
-      } text-xs flex items-center justify-center text-orange-50 ease-in duration-100`}
-    >
-      <span className="px-1">{value}</span>
-    </div>
+    </ElevatedCard>
   );
 }

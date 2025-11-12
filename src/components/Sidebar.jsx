@@ -1,6 +1,3 @@
-import { SidebarCloseIcon } from "lucide-react";
-import IconButton from "./IconButton";
-
 export default function SideBar({
   sidebarStatus,
   toggleSidebar,
@@ -12,15 +9,11 @@ export default function SideBar({
   }
   return (
     <div
-      className={`absolute h-screen left-0 w-[250px] bg-transparent backdrop-blur-xl z-10 border-r border-r-white/20 ease-in-out duration-150 overflow-hidden ${
+      className={`absolute top-16 h-full left-0 w-[250px] bg-surfaceContainer-low z-10 ease-in-out duration-150 overflow-hidden shadow-elevation2 ${
         sidebarStatus ? "" : "-translate-x-full"
       }`}
     >
-      <div className="p-2 relative flex items-center justify-end">
-        <IconButton onClick={() => toggleSidebar()}>
-          <SidebarCloseIcon />
-        </IconButton>
-      </div>
+      <div className="p-2 relative flex items-center justify-end"></div>
       <div className="flex flex-col gap-2 p-2">
         <SideBarItem
           text="BubbleSort"
@@ -58,14 +51,14 @@ export default function SideBar({
 function SideBarItem({ text = "", onClick, algo }) {
   const classes =
     algo == text
-      ? "bg-orange-500/25 font-medium text-orange-500 hover:text-orange-400"
-      : "bg-black/25";
+      ? "bg-primaryContainer text-label-large text-onPrimaryContainer"
+      : "bg-surfaceContianer-low text-label-large text-onSurface hover:bg-surfaceContainer";
   return (
     <div
       onClick={onClick}
       role="button"
       tabIndex={0}
-      className={`px-4 py-3 rounded-lg fontt text-sm duration-100 ease-in ${classes}`}
+      className={`px-4 py-3 rounded-full duration-150 ease-in ${classes}`}
     >
       {text}
     </div>

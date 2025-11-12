@@ -1,18 +1,20 @@
-import { SidebarOpenIcon } from "lucide-react";
-import IconButton from "./IconButton";
+import { Menu, SidebarOpenIcon } from "lucide-react";
+import IconButton from "./Buttons/IconButton";
 
-export default function Navbar({ toggleSidebar }) {
+export default function Navbar({ toggleSidebar, sidebarStatus }) {
   return (
-    <div className="p-4 flex items-center sticky justify-center z-9 bg-black/5 backdrop-blur-sm">
-      <div>
+    <div className="p-1 py-2.5 flex items-center sticky justify-center z-11 bg-surface backdrop-blur-sm">
+      <div className="absolute left-1">
         <IconButton onClick={toggleSidebar}>
-          <SidebarOpenIcon />
+          {sidebarStatus ? <SidebarOpenIcon size={24} /> : <Menu size={24} />}
         </IconButton>
       </div>
-      <h1 className="flex-1 text-center text-lg font-light z-2">
-        O<span className="font-black text-2xl text-orange-400">Log</span>
-        Visualizer
-      </h1>
+      <div className="flex flex-col text-onSurface">
+        <h1 className=" text-brand">oLog Visualizer</h1>
+        <p className=" text-onPrimaryContainer text-plain">
+          Algorithm Visualizer
+        </p>
+      </div>
     </div>
   );
 }

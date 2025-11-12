@@ -8,12 +8,8 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [algo, setAlgo] = useState("Bubblesort");
 
-  function openSidebar() {
-    setIsOpen(true);
-  }
-
-  function closeSidebar() {
-    setIsOpen(false);
+  function toggleSidebar() {
+    setIsOpen(!isOpen);
   }
 
   function renderAlgo() {
@@ -28,21 +24,23 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-surface text-onSurface">
       <header>
-        <Navbar sidebarStatus={isOpen} toggleSidebar={openSidebar} />
+        <Navbar sidebarStatus={isOpen} toggleSidebar={toggleSidebar} />
       </header>
       <SideBar
         sidebarStatus={isOpen}
-        toggleSidebar={closeSidebar}
         setAlgo={setAlgo}
         algo={algo}
+        toggleSidebar={toggleSidebar}
       />
-      <main>
-        <h1 className="text-3xl text-center fontt">
+      <main className="p-4">
+        <h1 className="text-headline-large">
           Javascript Algorithms Visualizer
         </h1>
-        {renderAlgo()}
+        <div className="mt-6">
+          {renderAlgo()}
+        </div>
       </main>
     </div>
   );
