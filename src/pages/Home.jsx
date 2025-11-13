@@ -4,22 +4,23 @@ import SideBar from "../components/Sidebar";
 import Bubblesort from "../algorithms/Bubblesort";
 import Insertionsort from "../algorithms/Insertionsort";
 import SelectionSort from "../algorithms/Selectionsort";
+import NavigationDrawer from "../components/Navigation/NavigationDrawer";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
-  const [algo, setAlgo] = useState("Bubblesort");
+  const [algoSelected, setAlgoSelected] = useState("Bubblesort");
 
   function toggleSidebar() {
     setIsOpen(!isOpen);
   }
 
   function renderAlgo() {
-    switch (algo) {
-      case "BubbleSort":
+    switch (algoSelected) {
+      case 0:
         return <Bubblesort />;
-      case "InsertionSort":
+      case 1:
         return <Insertionsort />;
-      case "SelectionSort":
+      case 2:
         return <SelectionSort />;
       default:
         return <Bubblesort />;
@@ -31,10 +32,10 @@ export default function Home() {
       <header>
         <Navbar sidebarStatus={isOpen} toggleSidebar={toggleSidebar} />
       </header>
-      <SideBar
+      <NavigationDrawer
         sidebarStatus={isOpen}
-        setAlgo={setAlgo}
-        algo={algo}
+        setAlgoSelected={setAlgoSelected}
+        algoSelected={algoSelected}
         toggleSidebar={toggleSidebar}
       />
       <main className="p-4">
