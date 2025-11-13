@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import Navbar from "../components/Navbar";
 import Bubblesort from "../algorithms/Bubblesort";
-import Insertionsort from "../algorithms/Insertionsort";
-import SelectionSort from "../algorithms/Selectionsort";
 import NavigationDrawer from "../components/Navigation/NavigationDrawer";
-import OddEvenSort from "../algorithms/OddEvensort";
-import CombSort from "../algorithms/Combsort";
-import ShakerSort from "../algorithms/Shakersort";
-import GnomeSort from "../algorithms/Gnomesort";
+
+// Lazy load all algorithms except Bubblesort
+const Insertionsort = lazy(() => import("../algorithms/Insertionsort"));
+const SelectionSort = lazy(() => import("../algorithms/Selectionsort"));
+const OddEvenSort = lazy(() => import("../algorithms/OddEvensort"));
+const CombSort = lazy(() => import("../algorithms/Combsort"));
+const ShakerSort = lazy(() => import("../algorithms/Shakersort"));
+const GnomeSort = lazy(() => import("../algorithms/Gnomesort"));
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
-  const [algoSelected, setAlgoSelected] = useState("Bubblesort");
+  const [algoSelected, setAlgoSelected] = useState(0);
 
   function toggleSidebar() {
     setIsOpen(!isOpen);
@@ -49,7 +51,13 @@ export default function Home() {
         algoSelected={algoSelected}
         toggleSidebar={toggleSidebar}
       />
-      <main className="p-4">{renderAlgo()}</main>
+      <main className="p-4">
+        <Suspense
+          fallback={<div className="text-center p-8">Loading Algorithm...</div>}
+        >
+          {renderAlgo()}
+        </Suspense>
+      </main>
     </div>
   );
 }
