@@ -1,22 +1,24 @@
 import { useRef } from "react";
 import IconButton from "../components/Buttons/IconButton";
-import { Barcode, Code } from "lucide-react";
+import { Code } from "lucide-react";
 import { useEffect, useState } from "react";
-import Bar from "../components/Bar";
 import ElevatedCard from "../components/cards/ElevatedCards";
 import StandardButtonS from "../components/Buttons/StandardButton";
 import TonalButton from "../components/Buttons/TonalButton";
+import SelectionSortBar from "../components/SelectionSortBar";
 import IndexRow from "../components/IndexRow";
 
-export default function Insertionsort() {
+export default function OddEvenSort() {
   const [array, setArray] = useState([]);
   const [workingArray, setWorkingArray] = useState([]);
   const [barCount, setBarCount] = useState(10);
   const [speed, setSpeed] = useState(300);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [selectedBar, setSelectedBar] = useState([]);
   const swapsRef = useRef([]);
   const intervalRef = useRef(null);
+  const [selectedBar, setSelectedBar] = useState([]);
+  const [secondSelectedBar, setSecondSelectedBar] = useState([]);
+  const [betweenBars, setBetweenBars] = useState([]);
 
   // Initialize array and clear sorted array
   function init() {
@@ -29,20 +31,33 @@ export default function Insertionsort() {
   }
 
   // Generate all swaps needed for bubble sort
-  function insertionSort(arr) {
+  function oddEvenSort(arr) {
     const swaps = [];
     let newArray = [...arr];
+    let isSorted = false;
 
-    for (let i = 0; i < newArray.length; i++) {
-      let currentValue = newArray[i];
-      let j = i - 1;
-      while (j >= 0 && newArray[j] > currentValue) {
-        swaps.push([j, j + 1]);
-        newArray[j + 1] = newArray[j];
-        j--;
+    while (!isSorted) {
+      isSorted = true;
+
+      // Odd phase: compare elements at odd indices with their successors
+      for (let i = 1; i < newArray.length - 1; i += 2) {
+        if (newArray[i] > newArray[i + 1]) {
+          swaps.push([i, i + 1]);
+          [newArray[i], newArray[i + 1]] = [newArray[i + 1], newArray[i]];
+          isSorted = false;
+        }
       }
-      newArray[j + 1] = currentValue;
+
+      // Even phase: compare elements at even indices with their successors
+      for (let i = 0; i < newArray.length - 1; i += 2) {
+        if (newArray[i] > newArray[i + 1]) {
+          swaps.push([i, i + 1]);
+          [newArray[i], newArray[i + 1]] = [newArray[i + 1], newArray[i]];
+          isSorted = false;
+        }
+      }
     }
+
     return swaps;
   }
 
@@ -58,12 +73,22 @@ export default function Insertionsort() {
       if (index >= swaps.length) {
         clearInterval(intervalRef.current);
         setIsAnimating(false);
-setSelectedBar([]);
+        setSelectedBar([]);
+        setSecondSelectedBar([]);
+        setBetweenBars([]);
         return;
       }
 
       const [i, j] = swaps[index];
-      setSelectedBar([i, j]);
+      setSelectedBar([i]);
+      setSecondSelectedBar([j]);
+
+      // Create array of all indices between i and j (exclusive)
+      const betweenIndices = [];
+      for (let k = i + 1; k < j; k++) {
+        betweenIndices.push(k);
+      }
+      setBetweenBars(betweenIndices);
 
       // Swap elements in array
       [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -80,17 +105,21 @@ setSelectedBar([]);
   }
 
   function play() {
-    swapsRef.current = insertionSort(array); // get list of swaps
+    swapsRef.current = oddEvenSort(array); // get list of swaps
     animateAlgo(swapsRef.current);
   }
 
   function showArray(arr) {
     return arr.map((value, index) => (
-      <Bar
+      <SelectionSortBar
         key={index}
         height={value * 100 + "%"}
         value={Math.floor(value * 100)}
         selected={selectedBar.includes(index)}
+        secondSelected={secondSelectedBar.includes(index)}
+        betweenBars={betweenBars.includes(index)}
+        selectedBar={selectedBar.includes(index) ? "i" : null}
+        secondSelectedBar={secondSelectedBar.includes(index) ? "j" : null}
       />
     ));
   }
@@ -110,16 +139,16 @@ setSelectedBar([]);
   return (
     <ElevatedCard className={"flex flex-col"}>
       <div className="text-title-large flex items-center justify-between">
-        <h2>Insertion Sort</h2>
+        <h2>Odd-Even Sort</h2>
         <IconButton>
           <Code />
         </IconButton>
       </div>
       <div className="flex flex-col flex-1 ">
-        <div className="relative flex h-[400px] items-end gap-0.5">
+        <div className="relative flex h-[400px] items-end justify-between gap-0.5">
           {workingArray.length > 0 ? showArray(workingArray) : showArray(array)}
         </div>
-        <IndexRow count={barCount}/>
+        <IndexRow count={barCount} />
         <div className="flex flex-col">
           <div className="flex flex-col gap-2 p-2 mt-4">
             <label htmlFor="bars" className="text-label-medium">
@@ -139,8 +168,7 @@ setSelectedBar([]);
           </div>
           <div className="flex flex-col gap-2 p-2 mt-4">
             <label htmlFor="bars" className="text-label-medium">
-              Speed:{" "}
-              <span className="text-secondary font-medium">{speed}</span>
+              Speed: <span className="text-secondary font-medium">{speed} ms</span>
             </label>
             <input
               type="range"

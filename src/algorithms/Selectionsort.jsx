@@ -122,7 +122,6 @@ export default function SelectionSort() {
 
   function handleBarCount(e) {
     setBarCount(e.target.value);
-    init();
   }
 
   function handleSpeed(e) {
@@ -131,7 +130,7 @@ export default function SelectionSort() {
 
   useEffect(() => {
     init();
-  }, []);
+  }, [barCount]);
 
   return (
     <ElevatedCard className={"flex flex-col"}>

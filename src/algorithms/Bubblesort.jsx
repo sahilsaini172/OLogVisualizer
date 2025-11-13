@@ -1,4 +1,3 @@
-
 import { useRef } from "react";
 import IconButton from "../components/Buttons/IconButton";
 import { Code } from "lucide-react";
@@ -101,7 +100,6 @@ export default function BubbleSort() {
 
   function handleBarCount(e) {
     setBarCount(e.target.value);
-    init();
   }
 
   function handleSpeed(e) {
@@ -110,7 +108,7 @@ export default function BubbleSort() {
 
   useEffect(() => {
     init();
-  }, []);
+  }, [barCount]);
 
   return (
     <ElevatedCard className={"flex flex-col"}>

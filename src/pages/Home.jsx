@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
-import SideBar from "../components/Sidebar";
 import Bubblesort from "../algorithms/Bubblesort";
 import Insertionsort from "../algorithms/Insertionsort";
 import SelectionSort from "../algorithms/Selectionsort";
 import NavigationDrawer from "../components/Navigation/NavigationDrawer";
+import OddEvenSort from "../algorithms/OddEvensort";
+import CombSort from "../algorithms/Combsort";
+import ShakerSort from "../algorithms/Shakersort";
+import GnomeSort from "../algorithms/Gnomesort";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,6 +25,14 @@ export default function Home() {
         return <Insertionsort />;
       case 2:
         return <SelectionSort />;
+      case 3:
+        return <OddEvenSort />;
+      case 4:
+        return <CombSort />;
+      case 5:
+        return <ShakerSort />;
+      case 6:
+        return <GnomeSort />;
       default:
         return <Bubblesort />;
     }
@@ -38,12 +49,7 @@ export default function Home() {
         algoSelected={algoSelected}
         toggleSidebar={toggleSidebar}
       />
-      <main className="p-4">
-        <h1 className="text-headline-large">
-          Javascript Algorithms Visualizer
-        </h1>
-        <div className="mt-6">{renderAlgo()}</div>
-      </main>
+      <main className="p-4">{renderAlgo()}</main>
     </div>
   );
 }

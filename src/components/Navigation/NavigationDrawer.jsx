@@ -11,7 +11,7 @@ export default function NavigationDrawer({
   };
   return (
     <div
-      className={`absolute z-1 top-17 left-0 bg-surfaceContainer-low h-screen shadow-elevation1 rounded-e-2xl w-[360px] p-4 flex flex-col ease-in transition-all duration-150 ${slide()}`}
+      className={`absolute z-1 top-17 left-0 bg-surfaceContainer-low h-full shadow-elevation1 rounded-e-2xl w-[360px] p-4 flex flex-col ease-in transition-all duration-150 ${slide()}`}
     >
       <h2 className="text-title-small text-onSurfaceVarient p-4">Algorithms</h2>
       <div className="flex flex-col gap-2">
@@ -38,6 +38,42 @@ export default function NavigationDrawer({
           label="Selection Sort"
           onClick={() => {
             setAlgoSelected(2);
+            toggleSidebar();
+          }}
+          algoSelected={algoSelected}
+        />
+        <NavigationDrawerItem
+          index={3}
+          label="Odd-Even Sort"
+          onClick={() => {
+            setAlgoSelected(3);
+            toggleSidebar();
+          }}
+          algoSelected={algoSelected}
+        />
+        <NavigationDrawerItem
+          index={4}
+          label="Comb Sort"
+          onClick={() => {
+            setAlgoSelected(4);
+            toggleSidebar();
+          }}
+          algoSelected={algoSelected}
+        />
+        <NavigationDrawerItem
+          index={5}
+          label="Shaker Sort"
+          onClick={() => {
+            setAlgoSelected(5);
+            toggleSidebar();
+          }}
+          algoSelected={algoSelected}
+        />
+        <NavigationDrawerItem
+          index={6}
+          label="Gnome Sort"
+          onClick={() => {
+            setAlgoSelected(6);
             toggleSidebar();
           }}
           algoSelected={algoSelected}

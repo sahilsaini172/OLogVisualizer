@@ -6,7 +6,7 @@ export default function SelectionSortBar({
   secondSelected,
   betweenBars,
   selectedBar,
-  secondSelectedBar
+  secondSelectedBar,
 }) {
   const getBarColor = () => {
     if (selected) return "bg-primary";
@@ -15,12 +15,11 @@ export default function SelectionSortBar({
     return "bg-onSurface";
   };
 
-  const getIndex = () =>{
-    if(selectedBar) return selectedBar;
-    if(secondSelectedBar) return secondSelectedBar;
-    if(betweenBars) return betweenBars;
-
-  }
+  const getIndex = () => {
+    if (selectedBar) return selectedBar;
+    if (secondSelectedBar) return secondSelectedBar;
+    if (betweenBars) return betweenBars;
+  };
 
   return (
     <div
@@ -28,7 +27,7 @@ export default function SelectionSortBar({
       style={{ height: height }}
       className={`rounded-full w-full relative ${getBarColor()} text-label-small flex items-center justify-center text-inverseOnSurface ease-in duration-100`}
     >
-      <span className="px-1">{value}</span>
+      <span>{value}</span>
       <span className="absolute -top-5 text-onSurface">{getIndex()}</span>
     </div>
   );
