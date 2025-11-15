@@ -140,7 +140,7 @@ export default function BubbleSort() {
             />
           </div>
           <div className="flex flex-col gap-2 p-2 mt-4">
-            <label htmlFor="bars" className="text-label-medium">
+            <label htmlFor="speed" className="text-label-medium">
               Speed: <span className="text-secondary font-medium">{speed}</span>
             </label>
             <input
