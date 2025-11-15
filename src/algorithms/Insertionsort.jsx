@@ -58,7 +58,7 @@ export default function Insertionsort() {
       if (index >= swaps.length) {
         clearInterval(intervalRef.current);
         setIsAnimating(false);
-setSelectedBar([]);
+        setSelectedBar([]);
         return;
       }
 
@@ -119,7 +119,7 @@ setSelectedBar([]);
         <div className="relative flex h-[400px] items-end gap-0.5">
           {workingArray.length > 0 ? showArray(workingArray) : showArray(array)}
         </div>
-        <IndexRow count={barCount}/>
+        <IndexRow count={barCount} />
         <div className="flex flex-col">
           <div className="flex flex-col gap-2 p-2 mt-4">
             <label htmlFor="bars" className="text-label-medium">
@@ -139,8 +139,7 @@ setSelectedBar([]);
           </div>
           <div className="flex flex-col gap-2 p-2 mt-4">
             <label htmlFor="bars" className="text-label-medium">
-              Speed:{" "}
-              <span className="text-secondary font-medium">{speed}</span>
+              Speed: <span className="text-secondary font-medium">{speed}</span>
             </label>
             <input
               type="range"
