@@ -8,6 +8,7 @@ import StandardButtonS from "../components/Buttons/StandardButton";
 import TonalButton from "../components/Buttons/TonalButton";
 import handleMaxBar from "../utils/functions";
 import SelectionSortBar from "../components/SelectionSortBar";
+import IndexRow from "../components/IndexRow";
 
 export default function BubbleSort({ maxBars }) {
   const [array, setArray] = useState([]);
@@ -125,6 +126,7 @@ export default function BubbleSort({ maxBars }) {
         <div className="relative flex h-[400px] items-end justify-between gap-0.5">
           {workingArray.length > 0 ? showArray(workingArray) : showArray(array)}
         </div>
+        <IndexRow count={barCount} />
         <div className="flex flex-col">
           <div className="flex flex-col">
             <div className="flex flex-col gap-2 p-2 mt-4">
