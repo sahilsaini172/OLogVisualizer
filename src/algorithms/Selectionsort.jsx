@@ -1,13 +1,12 @@
 import { useRef } from "react";
-import IconButton from "../components/Buttons/IconButton";
-import { Code } from "lucide-react";
 import { useEffect, useState } from "react";
 import ElevatedCard from "../components/cards/ElevatedCards";
-import Bar from "../components/Bar";
 import StandardButtonS from "../components/Buttons/StandardButton";
 import TonalButton from "../components/Buttons/TonalButton";
 import SelectionSortBar from "../components/SelectionSortBar";
 import IndexRow from "../components/IndexRow";
+import CodeSnippet from "../components/CodeSnippet";
+import { codeData } from "../data/codeSnippet";
 
 export default function SelectionSort({maxBars}) {
   const [array, setArray] = useState([]);
@@ -128,9 +127,7 @@ export default function SelectionSort({maxBars}) {
     <ElevatedCard className={"flex flex-col"}>
       <div className="text-title-large flex items-center justify-between">
         <h2>Selection Sort</h2>
-        <IconButton>
-          <Code />
-        </IconButton>
+        <CodeSnippet data={codeData.selectionsort}/>
       </div>
       <div className="flex flex-col flex-1 ">
         <div className="relative flex h-[400px] items-end justify-between gap-0.5">
