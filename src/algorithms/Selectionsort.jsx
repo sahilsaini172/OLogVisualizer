@@ -9,17 +9,17 @@ import TonalButton from "../components/Buttons/TonalButton";
 import SelectionSortBar from "../components/SelectionSortBar";
 import IndexRow from "../components/IndexRow";
 
-export default function SelectionSort() {
+export default function SelectionSort({maxBars}) {
   const [array, setArray] = useState([]);
   const [workingArray, setWorkingArray] = useState([]);
   const [barCount, setBarCount] = useState(10);
   const [speed, setSpeed] = useState(300);
   const [isAnimating, setIsAnimating] = useState(false);
-  const swapsRef = useRef([]);
-  const intervalRef = useRef(null);
   const [selectedBar, setSelectedBar] = useState([]);
   const [secondSelectedBar, setSecondSelectedBar] = useState([]);
   const [betweenBars, setBetweenBars] = useState([]);
+  const swapsRef = useRef([]);
+  const intervalRef = useRef(null);
 
   // Initialize array and clear sorted array
   function init() {
@@ -120,14 +120,6 @@ export default function SelectionSort() {
     ));
   }
 
-  function handleBarCount(e) {
-    setBarCount(e.target.value);
-  }
-
-  function handleSpeed(e) {
-    setSpeed(e.target.value);
-  }
-
   useEffect(() => {
     init();
   }, [barCount]);
@@ -148,23 +140,23 @@ export default function SelectionSort() {
         <div className="flex flex-col">
           <div className="flex flex-col gap-2 p-2 mt-4">
             <label htmlFor="bars" className="text-label-medium">
-              Bar count:{" "}
+              Bar count (5-{maxBars}):{" "}
               <span className="text-secondary font-medium">{barCount}</span>
             </label>
             <input
               type="range"
               id="bars"
               min={5}
-              max={15}
+              max={maxBars}
               step={1}
-              onChange={handleBarCount}
+              onChange={(e) => setBarCount(e.target.value)}
               value={barCount}
               className="bg-stone-700 slider rounded-full"
             />
           </div>
           <div className="flex flex-col gap-2 p-2 mt-4">
             <label htmlFor="bars" className="text-label-medium">
-              Speed: <span className="text-secondary font-medium">{speed}</span>
+              Speed: <span className="text-secondary font-medium">{speed} ms</span>
             </label>
             <input
               type="range"
@@ -172,7 +164,7 @@ export default function SelectionSort() {
               min={50}
               max={1000}
               step={50}
-              onChange={handleSpeed}
+              onChange={(e) => setSpeed(e.target.value)}
               value={speed}
               className="bg-stone-700 slider rounded-full"
             />

@@ -8,7 +8,7 @@ import TonalButton from "../components/Buttons/TonalButton";
 import SelectionSortBar from "../components/SelectionSortBar";
 import IndexRow from "../components/IndexRow";
 
-export default function OddEvenSort() {
+export default function OddEvenSort({ maxBars }) {
   const [array, setArray] = useState([]);
   const [workingArray, setWorkingArray] = useState([]);
   const [barCount, setBarCount] = useState(10);
@@ -152,7 +152,7 @@ export default function OddEvenSort() {
         <div className="flex flex-col">
           <div className="flex flex-col gap-2 p-2 mt-4">
             <label htmlFor="bars" className="text-label-medium">
-              Bar count:{" "}
+              Bar count (5-{maxBars}):{" "}
               <span className="text-secondary font-medium">{barCount}</span>
             </label>
             <input
@@ -161,14 +161,15 @@ export default function OddEvenSort() {
               min={5}
               max={15}
               step={1}
-              onChange={handleBarCount}
+              onChange={(e) => setBarCount(e.target.value)}
               value={barCount}
               className="bg-stone-700 slider rounded-full"
             />
           </div>
           <div className="flex flex-col gap-2 p-2 mt-4">
             <label htmlFor="bars" className="text-label-medium">
-              Speed: <span className="text-secondary font-medium">{speed} ms</span>
+              Speed:{" "}
+              <span className="text-secondary font-medium">{speed} ms</span>
             </label>
             <input
               type="range"
@@ -176,7 +177,7 @@ export default function OddEvenSort() {
               min={50}
               max={1000}
               step={50}
-              onChange={handleSpeed}
+              onChange={(e) => setSpeed(e.target.value)}
               value={speed}
               className="bg-stone-700 slider rounded-full"
             />

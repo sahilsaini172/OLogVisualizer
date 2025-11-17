@@ -1,7 +1,8 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Bubblesort from "../algorithms/Bubblesort";
 import NavigationDrawer from "../components/Navigation/NavigationDrawer";
+import handleMaxBar from "../utils/functions";
 
 // Lazy load all algorithms except Bubblesort
 const Insertionsort = lazy(() => import("../algorithms/Insertionsort"));
@@ -14,6 +15,14 @@ const GnomeSort = lazy(() => import("../algorithms/Gnomesort"));
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [algoSelected, setAlgoSelected] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(null);
+  const [maxBars, setMaxBars] = useState(10);
+
+  useEffect(() => {
+    // Set window size on mount
+    setWindowWidth(window.innerWidth);
+    setMaxBars(handleMaxBar(windowWidth));
+  });
 
   function toggleSidebar() {
     setIsOpen(!isOpen);
@@ -22,21 +31,21 @@ export default function Home() {
   function renderAlgo() {
     switch (algoSelected) {
       case 0:
-        return <Bubblesort />;
+        return <Bubblesort maxBars={maxBars} />;
       case 1:
-        return <Insertionsort />;
+        return <Insertionsort maxBars={maxBars} />;
       case 2:
-        return <SelectionSort />;
+        return <SelectionSort maxBars={maxBars} />;
       case 3:
-        return <OddEvenSort />;
+        return <OddEvenSort maxBars={maxBars} />;
       case 4:
-        return <CombSort />;
+        return <CombSort maxBars={maxBars} />;
       case 5:
-        return <ShakerSort />;
+        return <ShakerSort maxBars={maxBars} />;
       case 6:
-        return <GnomeSort />;
+        return <GnomeSort maxBars={maxBars} />;
       default:
-        return <Bubblesort />;
+        return <Bubblesort maxBars={maxBars} />;
     }
   }
 

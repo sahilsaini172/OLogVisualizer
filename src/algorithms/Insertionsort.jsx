@@ -1,20 +1,22 @@
 import { useRef } from "react";
 import IconButton from "../components/Buttons/IconButton";
-import { Barcode, Code } from "lucide-react";
+import { Code } from "lucide-react";
 import { useEffect, useState } from "react";
-import Bar from "../components/Bar";
 import ElevatedCard from "../components/cards/ElevatedCards";
 import StandardButtonS from "../components/Buttons/StandardButton";
 import TonalButton from "../components/Buttons/TonalButton";
 import IndexRow from "../components/IndexRow";
+import SelectionSortBar from "../components/SelectionSortBar";
 
-export default function Insertionsort() {
+export default function Insertionsort({maxBars}) {
   const [array, setArray] = useState([]);
   const [workingArray, setWorkingArray] = useState([]);
   const [barCount, setBarCount] = useState(10);
   const [speed, setSpeed] = useState(300);
   const [isAnimating, setIsAnimating] = useState(false);
   const [selectedBar, setSelectedBar] = useState([]);
+  const [secondSelectedBar, setSecondSelectedBar] = useState([]);
+  const [betweenBars, setBetweenBars] = useState([]);
   const swapsRef = useRef([]);
   const intervalRef = useRef(null);
 
@@ -59,11 +61,21 @@ export default function Insertionsort() {
         clearInterval(intervalRef.current);
         setIsAnimating(false);
         setSelectedBar([]);
+        setSecondSelectedBar([]);
+        setBetweenBars([]);
         return;
       }
 
       const [i, j] = swaps[index];
-      setSelectedBar([i, j]);
+      setSelectedBar([i]);
+      setSecondSelectedBar([j]);
+
+      // Create array of all indices between i and j (exclusive)
+      const betweenIndices = [];
+      for (let k = i + 1; k < j; k++) {
+        betweenIndices.push(k);
+      }
+      setBetweenBars(betweenIndices);
 
       // Swap elements in array
       [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -86,21 +98,17 @@ export default function Insertionsort() {
 
   function showArray(arr) {
     return arr.map((value, index) => (
-      <Bar
+      <SelectionSortBar
         key={index}
         height={value * 100 + "%"}
         value={Math.floor(value * 100)}
         selected={selectedBar.includes(index)}
+        secondSelected={secondSelectedBar.includes(index)}
+        betweenBars={betweenBars.includes(index)}
+        selectedBar={selectedBar.includes(index) ? "i" : null}
+        secondSelectedBar={secondSelectedBar.includes(index) ? "j" : null}
       />
     ));
-  }
-
-  function handleBarCount(e) {
-    setBarCount(e.target.value);
-  }
-
-  function handleSpeed(e) {
-    setSpeed(e.target.value);
   }
 
   useEffect(() => {
@@ -123,23 +131,23 @@ export default function Insertionsort() {
         <div className="flex flex-col">
           <div className="flex flex-col gap-2 p-2 mt-4">
             <label htmlFor="bars" className="text-label-medium">
-              Bar count:{" "}
+              Bar count (5-{maxBars}):{" "}
               <span className="text-secondary font-medium">{barCount}</span>
             </label>
             <input
               type="range"
               id="bars"
               min={5}
-              max={15}
+              max={maxBars}
               step={1}
-              onChange={handleBarCount}
+              onChange={(e) => setBarCount(e.target.value)}
               value={barCount}
               className="bg-stone-700 slider rounded-full"
             />
           </div>
           <div className="flex flex-col gap-2 p-2 mt-4">
             <label htmlFor="bars" className="text-label-medium">
-              Speed: <span className="text-secondary font-medium">{speed}</span>
+              Speed: <span className="text-secondary font-medium">{speed} ms</span>
             </label>
             <input
               type="range"
@@ -147,7 +155,7 @@ export default function Insertionsort() {
               min={50}
               max={1000}
               step={50}
-              onChange={handleSpeed}
+              onChange={(e) => setSpeed(e.target.value)}
               value={speed}
               className="bg-stone-700 slider rounded-full"
             />
