@@ -18,7 +18,7 @@ export default function CodeSnippet({ data }) {
       </IconButton>
       {showCode && (
         <div
-          className={`flex flex-col justify-start rounded-xl absolute w-[90vw] h-[50vh] select-text right-0 top-11 z-10 text-sm bg-[#282C34] p-2 shadow-2xl ${
+          className={`flex flex-col justify-start rounded-xl absolute w-[90vw] h-[50vh] select-text right-0 top-11 z-9 text-sm bg-[#282C34] p-2 shadow-2xl ${
             showCode ? "opacity" : "opacity-0"
           }`}
         >
