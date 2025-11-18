@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Bubblesort from "../algorithms/Bubblesort";
 import NavigationDrawer from "../components/Navigation/NavigationDrawer";
 import handleMaxBar from "../utils/functions";
+import Mergesort from "../algorithms/Mergesort";
 
 // Lazy load all algorithms except Bubblesort
 const Insertionsort = lazy(() => import("../algorithms/Insertionsort"));
@@ -44,6 +45,8 @@ export default function Home() {
         return <ShakerSort maxBars={maxBars} />;
       case 6:
         return <GnomeSort maxBars={maxBars} />;
+      case 7:
+        return <Mergesort maxBars={maxBars} />;
       default:
         return <Bubblesort maxBars={maxBars} />;
     }

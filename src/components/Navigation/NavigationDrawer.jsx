@@ -78,6 +78,15 @@ export default function NavigationDrawer({
           }}
           algoSelected={algoSelected}
         />
+        <NavigationDrawerItem
+          index={7}
+          label="Merge Sort"
+          onClick={() => {
+            setAlgoSelected(7);
+            toggleSidebar();
+          }}
+          algoSelected={algoSelected}
+        />
       </div>
     </div>
   );

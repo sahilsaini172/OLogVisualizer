@@ -9,9 +9,9 @@ export default function SelectionSortBar({
   secondSelectedBar,
 }) {
   const getBarColor = () => {
-    if (selected) return "bg-primary";
-    if (secondSelected) return "bg-tertiary";
-    if (betweenBars) return "bg-secondary";
+    if (selected) return "bg-[#56FF00]";
+    if (secondSelected) return "bg-blue-500";
+    if (betweenBars) return "bg-orange-500";
     return "bg-onSurface";
   };
 
