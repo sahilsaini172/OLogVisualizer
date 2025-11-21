@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="h-screen bg-surface">
       <Suspense fallback={<div>Loading...</div>}>
-      <Home/>
+        <Home />
       </Suspense>
     </div>
   );

@@ -1,11 +1,17 @@
-import { Icon, Plus } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggle } from "../../redux/sidebarState";
 
 export default function NavigationDrawer({
-  sidebarStatus,
-  toggleSidebar,
   setAlgoSelected,
   algoSelected,
 }) {
+  const sidebarStatus = useSelector((state) => state.sidebarState.value);
+  const dispatch = useDispatch();
+
+  function toggleSidebar() {
+    dispatch(toggle());
+  }
+
   const slide = () => {
     if (!sidebarStatus) return "-translate-x-full";
   };
